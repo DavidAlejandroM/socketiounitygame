@@ -143,6 +143,12 @@ io.on('connection', function(socket){
         console.log(`${currentPlayer.name} rscv: disconnect ${currentPlayer.name}`);
         socket.broadcast('other player disconnect',currentPlayer ); 
         console.log(`${currentPlayer.name} brsc: other player disconnect ${JSON.stringify(currentPlayer)}`);
+
+        clients.forEach((client, i) => {
+            if(client.name == currentPlayer.name){
+                clients.slice(1,i);
+            }
+        });
     })
 });
 
