@@ -78,7 +78,7 @@ io.on('connection', function(socket){
         clients.push(currentPlayer);
 
         console.log(`${currentPlayer.name} emit: play ${JSON.stringify(currentPlayer)}`);
-
+        socket.emit("play", currentPlayer);
         socket.broadcast('other player connected', currentPlayer);
 
     });

@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 114014750124725030}
   - component: {fileID: 114286871860121728}
   - component: {fileID: 114578979241607976}
+  - component: {fileID: 114966185994901462}
   m_Layer: 0
   m_Name: Healtbar Canvas
   m_TagString: Untagged
@@ -840,6 +841,17 @@ MonoBehaviour:
   currentHealth: 100
   isEnemy: 1
   sHealthBar: {fileID: 114141272016493544}
+--- !u!114 &114966185994901462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1547546634884566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3417ec4feda40c7a607a044e7276c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136431634444062312
 CapsuleCollider:
   m_ObjectHideFlags: 1

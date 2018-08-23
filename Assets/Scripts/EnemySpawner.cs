@@ -23,16 +23,20 @@ public class EnemySpawner : MonoBehaviour {
             enemySpawnPoints.Add(enemySpawnPoint);
         }
 
-        SpawnEnemies();
+        //SpawnEnemies();
 	}
-    public void SpawnEnemies(/*List<SpawnPoint>/*TODO networking*/)
+    public void SpawnEnemies(NetworkManager.EnemiesJSON enemiesJSON)
     {
         //TODO 
         int i = 0;
-        foreach(SpawnPoint sp in enemySpawnPoints)
+        foreach(NetworkManager.UserJSON enemyJSON in enemiesJSON.enemies)
         {
-            Vector3 position = sp.transform.position;
-            Quaternion rotation = sp.transform.rotation;
+            Vector3 position = new Vector3(enemyJSON.position[0],
+                                          enemyJSON.position[1],
+                                           enemyJSON.position[2]);
+            Quaternion rotation = Quaternion.Euler(enemyJSON.rotation[0],
+                                                  enemyJSON.rotation[1],
+                                                   enemyJSON.rotation[2]);
             GameObject newEnemy = Instantiate(enemy, position, rotation) as GameObject;
             newEnemy.name = i+"";
             PlayerController pc = newEnemy.GetComponent<PlayerController>();

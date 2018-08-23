@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SocketIO;
 
 public class NetworkManager : MonoBehaviour {
 
     public static NetworkManager instance;
     public Canvas canvas;
-    //public SocketIOComponent socket;
+    public SocketIOComponent socket;
     public InputField playerNameInput;
     public GameObject player;
+
 
     private void Awake()
     {
@@ -28,6 +30,15 @@ public class NetworkManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		//TODO suscription
+            socket.On("enemies",OnEnemies);
+            socket.On("other player connected",OnOtherPlayerConnected);
+            socket.On("play",OnPlay);
+            socket.On("player move",OnPlayerMove);
+            socket.On("player turn",OnPlayerTurn);
+            socket.On("player shoot",OnPlayerShoot);
+            socket.On("health",OnHealth);
+            socket.On("other player disconnect",OnOtherPlayerDisconnect);
+
 	}
 	
     public void JoinGame()
@@ -40,11 +51,104 @@ public class NetworkManager : MonoBehaviour {
     IEnumerator ConnectToServer()
     {
         yield return new WaitForSeconds(0.5f);
+
+        socket.Emit("player connect");
+
+        yield return new WaitForSeconds(1f);
+
+        string playerName = playerNameInput.text;
+        List<SpawnPoint> playerSpawnPoints = GetComponent<PlayerSpawner>().playerSpawnPoints;
+        List<SpawnPoint> enemySpawnPoints = GetComponent<EnemySpawner>().enemySpawnPoints;
+        PlayerJSON playerJSON = new PlayerJSON(playerName, playerSpawnPoints, enemySpawnPoints);
+        string data = JsonUtility.ToJson(playerJSON);
+        socket.Emit("play",new JSONObject(data));
+        canvas.gameObject.SetActive(false);
     }
 
     #endregion
 
     #region Listening
+    void OnEnemies(SocketIOEvent socketIOEvent){
+
+    }
+
+    void OnOtherPlayerConnected(SocketIOEvent socketIOEvent){
+        print("Someone else joined");
+        string data = socketIOEvent.data.ToString();
+        UserJSON userJSON = UserJSON.CreateFromJSON(data);
+        Vector3 position = new Vector3(
+            userJSON.position[0],
+            userJSON.position[1],
+            userJSON.position[2]);
+        Quaternion rotation = Quaternion.Euler(
+            userJSON.rotation[0],
+            userJSON.rotation[1],
+            userJSON.rotation[2]);
+        GameObject o = GameObject.Find(userJSON.name) as GameObject;
+        if(o != null){
+            return;
+        }
+        GameObject p = Instantiate(player, position, rotation) as GameObject;
+        PlayerController pc = p.GetComponent<PlayerController>();
+
+        Transform t = p.transform.Find("Healthbar Canvas");
+        Transform t1 = t.transform.Find("Player Name");
+        Text playerName = t1.GetComponent<Text>();
+        playerName.text = userJSON.name;
+        pc.isLocalPlayer = false;
+        p.name = userJSON.name;
+
+        Health h = p.GetComponent<Health>();
+        h.currentHealth = userJSON.health;
+        h.OnChangeHealth();
+    }
+
+    void OnPlay(SocketIOEvent socketIOEvent){
+        print("you joined");
+        string data = socketIOEvent.data.ToString();
+        UserJSON currentUserJSON = UserJSON.CreateFromJSON(data);
+        Vector3 position = new Vector3(
+            currentUserJSON.position[0],
+            currentUserJSON.position[1],
+            currentUserJSON.position[2]);
+        Quaternion rotation = Quaternion.Euler(
+            currentUserJSON.rotation[0],
+            currentUserJSON.rotation[1],
+            currentUserJSON.rotation[2]);
+        GameObject o = GameObject.Find(currentUserJSON.name) as GameObject;
+
+        GameObject p = Instantiate(player, position, rotation) as GameObject;
+        PlayerController pc = p.GetComponent<PlayerController>();
+
+        Transform t = p.transform.Find("Healthbar Canvas");
+        Transform t1 = t.transform.Find("Player Name");
+        Text playerName = t1.GetComponent<Text>();
+        playerName.text = currentUserJSON.name;
+        pc.isLocalPlayer = false;
+        p.name = currentUserJSON.name;
+    }
+
+    void OnPlayerMove(SocketIOEvent socketIOEvent){
+
+    }
+
+    void OnPlayerTurn(SocketIOEvent socketIOEvent){
+
+    }
+
+    void OnPlayerShoot(SocketIOEvent socketIOEvent){
+
+    }
+
+    void OnHealth(SocketIOEvent socketIOEvent){
+
+    }
+
+    void OnOtherPlayerDisconnect(SocketIOEvent socketIOEvent){
+
+    }
+
+
     #endregion
 
     #region JSONMessageClasses
@@ -166,7 +270,7 @@ public class NetworkManager : MonoBehaviour {
     {
         public List<UserJSON> enemies;
 
-        public static EnemiesJSON CreateFromJSOM(string data)
+        public static EnemiesJSON CreateFromJSON(string data)
         {
             return JsonUtility.FromJson<EnemiesJSON>(data);
         }
