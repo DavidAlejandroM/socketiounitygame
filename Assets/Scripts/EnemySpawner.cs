@@ -38,11 +38,11 @@ public class EnemySpawner : MonoBehaviour {
                                                   enemyJSON.rotation[1],
                                                    enemyJSON.rotation[2]);
             GameObject newEnemy = Instantiate(enemy, position, rotation) as GameObject;
-            newEnemy.name = i+"";
+            newEnemy.name = enemyJSON.name;
             PlayerController pc = newEnemy.GetComponent<PlayerController>();
             pc.isLocalPlayer = false;
             Health h = newEnemy.GetComponent<Health>();
-            h.currentHealth = 100;
+            h.currentHealth = enemyJSON.health;
             h.OnChangeHealth();
             h.isEnemy = true;
             i++;

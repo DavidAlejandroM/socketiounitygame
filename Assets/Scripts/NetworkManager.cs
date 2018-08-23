@@ -43,13 +43,17 @@ public class NetworkManager : MonoBehaviour {
 	
     public void JoinGame()
     {
+        print("Join Game Click....");
         StartCoroutine(ConnectToServer());
+
     }
 
     #region Commands
 
     IEnumerator ConnectToServer()
     {
+        socket.Emit("connection");
+
         yield return new WaitForSeconds(0.5f);
 
         socket.Emit("player connect");
@@ -69,7 +73,9 @@ public class NetworkManager : MonoBehaviour {
 
     #region Listening
     void OnEnemies(SocketIOEvent socketIOEvent){
-
+        EnemiesJSON enemiesJSON = EnemiesJSON.CreateFromJSON(socketIOEvent.data.ToString());
+        EnemySpawner es = GetComponent<EnemySpawner>();
+        es.SpawnEnemies(enemiesJSON);
     }
 
     void OnOtherPlayerConnected(SocketIOEvent socketIOEvent){
