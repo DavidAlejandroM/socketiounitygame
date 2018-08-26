@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{5334A1E2-4761-C98A-E9D8-6FAE6FCE33D5}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Health.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
       <File FileName="Assets/Scripts/NetworkManager.cs" Line="479" Column="31" />
       <File FileName="Assets/SocketIO/Scripts/SocketIO/SocketIOComponent.cs" Line="286" Column="1" />

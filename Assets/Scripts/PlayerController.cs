@@ -71,9 +71,9 @@ public class PlayerController : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(0))
         {
-            //TODO networking
-            //n.CommandShott();
-            CmdFire();
+            NetworkManager n = NetworkManager.instance.GetComponent<NetworkManager>();
+            n.CommandShoot();
+            //CmdFire();
         }
 
     }
