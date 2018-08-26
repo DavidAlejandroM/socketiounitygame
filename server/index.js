@@ -55,7 +55,6 @@ io.on('connection', function(socket) {
 					rotation: _playerSpawnPoint.rotation
 				};
                 playerSpawnPoints.push(playerSpawnPoint);
-                console.log("____________________",playerSpawnPoints);
 			});
 		}
 

@@ -28,6 +28,7 @@ public class Health : MonoBehaviour {
         currentHealth -= amount;
         //print("la salud está en :" + currentHealth);
         OnChangeHealth();
+        //NetworkManager.instance.GetComponent<NetworkManager>
         //TODO network
     }
 

@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-    public bool isLocalPlayer = true; //TODO: switch with networking 
+    public bool isLocalPlayer = false;
     public bool isGrounded = true;
     public float speed = 3.0f;
     public float rotationSpeed = 450.0f;
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     void Update () {
 
         if (!isLocalPlayer){
+            print("No es local player");
             return;
         }
 
@@ -46,12 +47,12 @@ public class PlayerController : MonoBehaviour {
         currentRotation = transform.rotation;
 
         if(currentPosition != oldPosition) {
-            //TODO networking
+            NetworkManager.instance.GetComponent<NetworkManager>().CommandMove(transform.position); 
             oldPosition = currentPosition;
         }
 
         if(currentRotation != oldRotation) {
-            //TODO networking
+            NetworkManager.instance.GetComponent<NetworkManager>().CommandTurn(transform.rotation);
             oldRotation = currentRotation;
         }
 

@@ -53,6 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc032cb40f8f8c47bdb91180074fe7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  socket: {fileID: 0}
+  playerNameInput: {fileID: 0}
+  player: {fileID: 1309242368200664, guid: 0e6d2a170198c5243b6f68ae1c18346a, type: 2}
 --- !u!114 &114679592404400386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,6 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b17c18d32c0c841a108b89f1f231b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpawnPoints:
+  - {fileID: 0}
 --- !u!114 &114885419327396308
 MonoBehaviour:
   m_ObjectHideFlags: 1

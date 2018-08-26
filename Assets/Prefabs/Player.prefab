@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 114844655107092222}
   - component: {fileID: 114685084196806988}
   m_Layer: 0
-  m_Name: Healtbar Canvas
+  m_Name: Healthbar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
