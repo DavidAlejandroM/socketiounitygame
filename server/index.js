@@ -23,6 +23,7 @@ io.on('connection', function(socket) {
 		for(var i =0; i<clients.length;i++) {
 			var playerConnected = {
 				name:clients[i].name,
+				type:clients[i].type,
 				position:clients[i].position,
 				rotation:clients[i].position,
 				health:clients[i].health
@@ -35,6 +36,14 @@ io.on('connection', function(socket) {
 
 	socket.on('play', function(data) {
 		console.log(currentPlayer.name+' recv: play: '+JSON.stringify(data));
+		
+		clients.forEach((client, index) => {
+			if(client.name == data.name){
+				data.name += ` (${guidShort()})`;
+			}
+			console.log(index);
+		});
+
 		// if this is the first person to join the game init the enemies
 		if(clients.length === 0) {
 			numberOfEnemies = data.enemySpawnPoints.length;
@@ -50,8 +59,12 @@ io.on('connection', function(socket) {
 			});
 
 			data.playerSpawnPoints.forEach(function(_playerSpawnPoint,index) {
+				let position = _playerSpawnPoint.position;
+				position[0] = (Math.floor((Math.random() * 20)) - Math.floor((Math.random() * 20)));
+				position[2] = (Math.floor((Math.random() * 20)) - Math.floor((Math.random() * 20)));
+
 				var playerSpawnPoint = {
-					position: _playerSpawnPoint.position,
+					position: position,
 					rotation: _playerSpawnPoint.rotation
 				};
                 playerSpawnPoints.push(playerSpawnPoint);
@@ -67,6 +80,7 @@ io.on('connection', function(socket) {
 		var randomSpawnPoint = playerSpawnPoints[Math.floor(Math.random() * playerSpawnPoints.length)];
 		currentPlayer = {
 			name:data.name,
+			type: data.type,
 			position: randomSpawnPoint.position,
 			rotation: randomSpawnPoint.rotation,
 			health: 100
@@ -81,19 +95,19 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('player move', function(data) {
-		console.log('recv: move: '+JSON.stringify(data));
+		//console.log('recv: move: '+JSON.stringify(data));
 		currentPlayer.position = data.position;
 		socket.broadcast.emit('player move', currentPlayer);
 	});
 
 	socket.on('player turn', function(data) {
-		console.log('recv: turn: '+JSON.stringify(data));
+		//console.log('recv: turn: '+JSON.stringify(data));
 		currentPlayer.rotation = data.rotation;
 		socket.broadcast.emit('player turn', currentPlayer);
 	});
 
 	socket.on('player shoot', function() {
-		console.log(currentPlayer.name+' recv: shoot');
+		//console.log(currentPlayer.name+' recv: shoot');
 		var data = {
 			name: currentPlayer.name
 		};
@@ -155,4 +169,11 @@ function guid() {
 		return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
 	}
 	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+function guidShort() {
+	function s4() {
+		return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
+	}
+	return s4();
 }

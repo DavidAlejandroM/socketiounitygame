@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  typePlayerDropdown: {fileID: 0}
   socket: {fileID: 0}
   playerNameInput: {fileID: 0}
   player: {fileID: 1309242368200664, guid: 0e6d2a170198c5243b6f68ae1c18346a, type: 2}
@@ -83,5 +84,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1479649536743048, guid: 02e3d898c02f2a14bb1eef588d871401, type: 2}
   spawnPoint: {fileID: 1367612466183112, guid: 23aa80b72357fcd4abf8ff51c40ab3b9, type: 2}
-  numberOfEnemies: 4
+  numberOfEnemies: 0
   enemySpawnPoints: []

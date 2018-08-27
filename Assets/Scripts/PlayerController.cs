@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public bool isGrounded = true;
     public float speed = 3.0f;
     public float rotationSpeed = 450.0f;
+    public Vector3 speedJump = new Vector3(0, 10, 0);
 
 
     Vector3 oldPosition;
@@ -56,18 +57,11 @@ public class PlayerController : MonoBehaviour {
             oldRotation = currentRotation;
         }
 
-        /*if(currentPosition.y <= 1.0f && currentPosition.y > 0.9f)
-        {
-            print("tierra");
-            isGrounded = true;
-        }
-        else
-        {
-            print("no tierra");
-            isGrounded = false;
+        if (Input.GetKeyDown(KeyCode.Space)){
+            GetComponent<Rigidbody>().velocity = speedJump;
         }
 
-        print("posicion en y = " + currentPosition.y);*/
+
 
         if(Input.GetMouseButtonDown(0))
         {

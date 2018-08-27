@@ -319,9 +319,13 @@ public class NetworkManager : MonoBehaviour
 
     public static NetworkManager instance;
     public Canvas canvas;
+    public Dropdown typePlayerDropdown;
     public SocketIOComponent socket;
     public InputField playerNameInput;
     public GameObject player;
+    public GameObject[] players;
+    private bool isRespServer = true;
+    
 
     void Awake()
     {
@@ -348,7 +352,11 @@ public class NetworkManager : MonoBehaviour
 
     public void JoinGame()
     {
-        StartCoroutine(ConnectToServer());
+        if (isRespServer)
+        {
+            StartCoroutine(ConnectToServer());
+            isRespServer = false;
+        }
     }
 
     #region Commands
@@ -364,10 +372,15 @@ public class NetworkManager : MonoBehaviour
         string playerName = playerNameInput.text;
         List<SpawnPoint> playerSpawnPoints = GetComponent<PlayerSpawner>().playerSpawnPoints;
         List<SpawnPoint> enemySpawnPoints = GetComponent<EnemySpawner>().enemySpawnPoints;
-        PlayerJSON playerJSON = new PlayerJSON(playerName, playerSpawnPoints, enemySpawnPoints);
+        PlayerJSON playerJSON = new PlayerJSON(
+            playerName, 
+            playerSpawnPoints, 
+            enemySpawnPoints,
+            typePlayerDropdown.value);
         string data = JsonUtility.ToJson(playerJSON);
         socket.Emit("play", new JSONObject(data));
         canvas.gameObject.SetActive(false);
+        isRespServer = true;
     }
 
     public void CommandMove(Vector3 vec3)
@@ -420,7 +433,14 @@ public class NetworkManager : MonoBehaviour
             return;
         }
 
-        GameObject p = Instantiate(player, position, rotation) as GameObject;
+        GameObject p = GameObject.Find(userJSON.name);
+
+        if (p == null)
+        {
+            p = Instantiate(players[userJSON.type], position, rotation) as GameObject;
+        }
+
+        //GameObject p = Instantiate(player, position, rotation) as GameObject;
         // here we are setting up their other fields name and if they are local
         PlayerController pc = p.GetComponent<PlayerController>();
         Camera camera = p.GetComponentInChildren<Camera>();
@@ -441,10 +461,13 @@ public class NetworkManager : MonoBehaviour
     {
         print("you joined");
         string data = socketIOEvent.data.ToString();
+
         UserJSON currentUserJSON = UserJSON.CreateFromJSON(data);
+
         Vector3 position = new Vector3(currentUserJSON.position[0], currentUserJSON.position[1], currentUserJSON.position[2]);
         Quaternion rotation = Quaternion.Euler(currentUserJSON.rotation[0], currentUserJSON.rotation[1], currentUserJSON.rotation[2]);
-        GameObject p = Instantiate(player, position, rotation) as GameObject;
+        //GameObject p = Instantiate(player, position, rotation) as GameObject;
+        GameObject p = Instantiate(players[currentUserJSON.type], position, rotation) as GameObject;
         PlayerController pc = p.GetComponent<PlayerController>();
         Transform t = p.transform.Find("Healthbar Canvas");
         Transform t1 = t.transform.Find("Player Name");
@@ -525,14 +548,16 @@ public class NetworkManager : MonoBehaviour
     public class PlayerJSON
     {
         public string name;
+        public int type;
         public List<PointJSON> playerSpawnPoints;
         public List<PointJSON> enemySpawnPoints;
 
-        public PlayerJSON(string _name, List<SpawnPoint> _playerSpawnPoints, List<SpawnPoint> _enemySpawnPoints)
+        public PlayerJSON(string _name, List<SpawnPoint> _playerSpawnPoints, List<SpawnPoint> _enemySpawnPoints, int _type)
         {
             playerSpawnPoints = new List<PointJSON>();
             enemySpawnPoints = new List<PointJSON>();
             name = _name;
+            type = _type;
             foreach (SpawnPoint playerSpawnPoint in _playerSpawnPoints)
             {
                 PointJSON pointJSON = new PointJSON(playerSpawnPoint);
@@ -594,6 +619,7 @@ public class NetworkManager : MonoBehaviour
     public class UserJSON
     {
         public string name;
+        public int type;
         public float[] position;
         public float[] rotation;
         public int health;

@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/mac.unity
     guid: ff9803c3c14014e40bd78962d6d2787f
+  - enabled: 1
+    path: Assets/mac2.unity
+    guid: df937cb0acf4c774090cfd5c8451a621
   m_configObjects: {}
