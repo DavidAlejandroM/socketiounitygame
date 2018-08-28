@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933d33dcd8d3267409be299c3004d252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyOnDeath: 0
+  destroyOnDeath: 1
   currentHealth: 100
   isEnemy: 0
   sHealthBar: {fileID: 114241284231325834}
