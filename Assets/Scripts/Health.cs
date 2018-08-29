@@ -37,14 +37,16 @@ public class Health : MonoBehaviour {
     {
         //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         sHealthBar.value = (currentHealth+0.0f) / (maxHealth+0.0f);
+        NetworkManager nm = NetworkManager.instance.GetComponent<NetworkManager>();
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             if (destroyOnDeath)
             {
                 if(isLocalPlayer){
                     NetworkManager.instance.GetComponent<NetworkManager>()
                         .canvas.gameObject.SetActive(true);
+
 
                 }
                 Destroy(gameObject);
