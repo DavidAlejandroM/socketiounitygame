@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{5334A1E2-4761-C98A-E9D8-6FAE6FCE33D5}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NetworkManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/NetworkManager.cs" Line="409" Column="6" />
+      <File FileName="Assets/Scripts/NetworkManager.cs" Line="484" Column="39" />
       <File FileName="Assets/SocketIO/Scripts/SocketIO/SocketIOComponent.cs" Line="286" Column="1" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="55" Column="45" />
-      <File FileName="Assets/Scripts/Health.cs" Line="46" Column="36" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="33" Column="15" />
+      <File FileName="Assets/Scripts/Health.cs" Line="54" Column="17" />
+      <File FileName="Assets/Scripts/Bullet.cs" Line="17" Column="25" />
+      <File FileName="Assets/Scripts/PlayerSpawner.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -16,6 +18,11 @@
       <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="159" column="1" />
       <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="160" column="1" />
       <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="93" column="1" />
+      <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="415" column="1" />
+      <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="546" column="1" />
+      <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="545" column="1" />
+      <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="544" column="1" />
+      <Breakpoint file="/Users/alejandro/GitHub/socketiounitygame/Assets/Scripts/NetworkManager.cs" relfile="Assets/Scripts/NetworkManager.cs" line="543" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

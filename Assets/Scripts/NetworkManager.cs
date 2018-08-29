@@ -348,6 +348,7 @@ public class NetworkManager : MonoBehaviour
         socket.On("player shoot", OnPlayerShoot);
         socket.On("health", OnHealth);
         socket.On("other player disconnected", OnOtherPlayerDisconnect);
+        socket.On("player-death", OnPlayerDead);
     }
 
     public void JoinGame()
@@ -408,8 +409,10 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("health", new JSONObject(JsonUtility.ToJson(healthChangeJSON)));
     }
 
-    public void CommandDeath(GameObject player){
-        canvas.gameObject.SetActive(true);
+    public void CommandDeath(String name){
+        UserJSON uj = new UserJSON();
+        uj.name = name;
+        socket.Emit("death-player", new JSONObject(JsonUtility.ToJson(uj)));
     }
 
     #endregion
@@ -534,6 +537,13 @@ public class NetworkManager : MonoBehaviour
         Health h = p.GetComponent<Health>();
         h.currentHealth = userHealthJSON.health;
         h.OnChangeHealth();
+    }
+
+    void OnPlayerDead(SocketIOEvent socketIOEvent){
+        string data = socketIOEvent.data.ToString();
+        UserJSON userJSON = UserJSON.CreateFromJSON(data);
+        GameObject p = GameObject.Find(userJSON.name);
+        Destroy(p);
     }
 
     void OnOtherPlayerDisconnect(SocketIOEvent socketIOEvent)

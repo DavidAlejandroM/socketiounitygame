@@ -116,6 +116,12 @@ io.on('connection', function(socket) {
 		socket.broadcast.emit('player shoot', data);
 	});
 
+	socket.on("death-player", data =>{
+		console.log(`${currentPlayer.name} recv: death-player: ${JSON.stringify(data)}`);
+		console.log(currentPlayer.name+' bcst: death-player: '+JSON.stringify(data));
+		socket.broadcast.emit('death-player', data);
+	});
+
 	socket.on('health', function(data) {
 		console.log(currentPlayer.name+' recv: health: '+JSON.stringify(data));
 		// only change the health once, we can do this by checking the originating player

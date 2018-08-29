@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
     void Update () {
 
         if (!isLocalPlayer){
-            print("No es local player");
+            //print("No es local player");
             return;
         }
 

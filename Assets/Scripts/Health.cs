@@ -48,6 +48,12 @@ public class Health : MonoBehaviour {
 
                 }
                 Destroy(gameObject);
+                string name = gameObject
+                              .GetComponentInChildren<Canvas>()
+                              .GetComponentInChildren<Text>().text;
+
+                NetworkManager.instance.GetComponent<NetworkManager>()
+                              .CommandDeath(name);
                 GameObject g = null;
             }
         }
