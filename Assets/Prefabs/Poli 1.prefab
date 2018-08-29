@@ -633,13 +633,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1424002336762572}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.12, z: -5.87}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 5, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4867675678512194}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!4 &4246062742642122
 Transform:
   m_ObjectHideFlags: 1
@@ -786,7 +786,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958651740707224}
   m_LocalRotation: {x: 0.70710635, y: -0, z: -0, w: 0.7071073}
-  m_LocalPosition: {x: 0.449, y: 0.899, z: 0.4699998}
+  m_LocalPosition: {x: 0.449, y: 0.9, z: 0.76}
   m_LocalScale: {x: 0.29999998, y: 0.9105505, z: 0.3000001}
   m_Children: []
   m_Father: {fileID: 4867675678512194}
@@ -1186,8 +1186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
   currentHealth: 100
-  isEnemy: 0
-  sHealthBar: {fileID: 0}
+  isEnemy: 1
+  sHealthBar: {fileID: 114105800963376488}
 --- !u!114 &114418188671006716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1298,10 +1298,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.47371173
+  m_Height: 3.2894983
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.2, z: -0.116880655}
 --- !u!137 &137675447692847784
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -2,10 +2,10 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/NetworkManager.cs" Line="479" Column="31" />
+      <File FileName="Assets/Scripts/NetworkManager.cs" Line="409" Column="6" />
       <File FileName="Assets/SocketIO/Scripts/SocketIO/SocketIOComponent.cs" Line="286" Column="1" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="55" Column="100" />
-      <File FileName="Assets/Scripts/Health.cs" Line="31" Column="11" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="55" Column="45" />
+      <File FileName="Assets/Scripts/Health.cs" Line="46" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

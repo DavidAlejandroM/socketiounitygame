@@ -408,6 +408,10 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("health", new JSONObject(JsonUtility.ToJson(healthChangeJSON)));
     }
 
+    public void CommandDeath(GameObject player){
+        canvas.gameObject.SetActive(true);
+    }
+
     #endregion
 
     #region Listening

@@ -42,7 +42,13 @@ public class Health : MonoBehaviour {
         {
             if (destroyOnDeath)
             {
+                if(isLocalPlayer){
+                    NetworkManager.instance.GetComponent<NetworkManager>()
+                        .canvas.gameObject.SetActive(true);
+
+                }
                 Destroy(gameObject);
+                GameObject g = null;
             }
         }
     }
