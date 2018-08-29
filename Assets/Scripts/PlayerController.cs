@@ -58,7 +58,12 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Space)){
-            GetComponent<Rigidbody>().velocity = speedJump;
+            float f = this.gameObject.transform.position.y;
+            if (f < 0.2)
+            {
+                GetComponent<Rigidbody>().velocity = speedJump;
+            }
+           
         }
 
 
