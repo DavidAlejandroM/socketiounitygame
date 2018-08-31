@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
 			if(client.name == data.name){
 				data.name += ` (${guidShort()})`;
 			}
-			console.log(index);
+			//console.log(index);
 		});
 
 		// if this is the first person to join the game init the enemies
@@ -82,7 +82,7 @@ io.on('connection', function(socket) {
 			(Math.floor((Math.random() * 45)) - Math.floor((Math.random() * 45))),
 			1.2,
 			(Math.floor((Math.random() * 45)) - Math.floor((Math.random() * 45)))];
-        console.log(currentPlayer.name+' emit: enemies: '+JSON.stringify(enemiesResponse));
+        //console.log(currentPlayer.name+' emit: enemies: '+JSON.stringify(enemiesResponse));
 		socket.emit('enemies', enemiesResponse);
 		var randomSpawnPoint = playerSpawnPoints[Math.floor(Math.random() * playerSpawnPoints.length)];
 		currentPlayer = {
@@ -94,7 +94,7 @@ io.on('connection', function(socket) {
 		};
 		clients.push(currentPlayer);
         // in your current game, tell you that you have joined
-        console.log("Tamaño clientes",clients.length);
+        //console.log("Tamaño clientes",clients.length);
 		console.log(currentPlayer.name+' emit: play: '+JSON.stringify(currentPlayer));
 		socket.emit('play', currentPlayer);
 		// in your current game, we need to tell the other players about you.
@@ -118,7 +118,7 @@ io.on('connection', function(socket) {
 		var data = {
 			name: currentPlayer.name
 		};
-		console.log(currentPlayer.name+' bcst: shoot: '+JSON.stringify(data));
+		//console.log(currentPlayer.name+' bcst: shoot: '+JSON.stringify(data));
 		socket.emit('player shoot', data);
 		socket.broadcast.emit('player shoot', data);
 	});
@@ -126,7 +126,7 @@ io.on('connection', function(socket) {
 	socket.on("player death", data =>{
 		//console.log(`${currentPlayer.name} recv: player death: ${JSON.stringify(data)}`);
 		socket.broadcast.emit('other player disconnected', data);
-		console.log(data.name+' bcst: other player disconnected '+JSON.stringify(currentPlayer));
+		console.log(data.name+' bcst: isDead '+JSON.stringify(currentPlayer));
 		for(var i=0; i<clients.length; i++) {
 			if(clients[i].name === data.name) {
 				clients.splice(i,1);
@@ -135,7 +135,7 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('health', function(data) {
-		console.log(currentPlayer.name+' recv: health: '+JSON.stringify(data));
+		//console.log(currentPlayer.name+' recv: health: '+JSON.stringify(data));
 		// only change the health once, we can do this by checking the originating player
 		if(data.from === currentPlayer.name) {
 			var indexDamaged = 0;
@@ -168,7 +168,7 @@ io.on('connection', function(socket) {
 				name: clients[indexDamaged].name,
 				health: clients[indexDamaged].health
 			};
-			console.log(currentPlayer.name+' bcst: health: '+JSON.stringify(response));
+			//console.log(currentPlayer.name+' bcst: health: '+JSON.stringify(response));
 			socket.emit('health', response);
 			socket.broadcast.emit('health', response);
 		}
