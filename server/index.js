@@ -16,12 +16,13 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
 	
 	var currentPlayer = {};
+	var currentIP = socket.handshake.address;
 	currentPlayer.name = 'unknown';
 	console.log("player connect");
 	
 
 	socket.on('player connect', function() {
-		console.log(currentPlayer.name+' recv: player connect');
+		console.log(currentPlayer.name+ 'ip:' + currentIP+' recv: player connect');
 		for(var i =0; i<clients.length;i++) {
 			var playerConnected = {
 				name:clients[i].name,
@@ -123,7 +124,7 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on("player death", data =>{
-		console.log(`${currentPlayer.name} recv: player death: ${JSON.stringify(data)}`);
+		//console.log(`${currentPlayer.name} recv: player death: ${JSON.stringify(data)}`);
 		socket.broadcast.emit('other player disconnected', data);
 		console.log(data.name+' bcst: other player disconnected '+JSON.stringify(currentPlayer));
 		for(var i=0; i<clients.length; i++) {
