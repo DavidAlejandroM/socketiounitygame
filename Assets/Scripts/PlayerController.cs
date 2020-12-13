@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     public float speed = 3.0f;
     public float rotationSpeed = 450.0f;
     public Vector3 speedJump = new Vector3(0, 10, 0);
+
+    private DateTime dateTimeShot;
 
 
     Vector3 oldPosition;
@@ -70,8 +73,14 @@ public class PlayerController : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(0))
         {
-            NetworkManager n = NetworkManager.instance.GetComponent<NetworkManager>();
-            n.CommandShoot();
+            TimeSpan difference = DateTime.Now.Subtract(dateTimeShot);
+            if (difference.TotalSeconds >= 1)
+            {
+                NetworkManager n = NetworkManager.instance.GetComponent<NetworkManager>();
+                n.CommandShoot();
+                dateTimeShot = DateTime.Now;
+            }
+           
             //CmdFire();
         }
 

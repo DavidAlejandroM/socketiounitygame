@@ -1,8 +1,11 @@
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+//var playerConnect = require('./src/playerConnect');
+const PORT = process.env.PORT || 3000;
 
-server.listen(3000);
+server.listen(PORT);
+console.log(`port: ${PORT}`);
 
 // global variables for the server
 var enemies = [];
@@ -49,7 +52,7 @@ io.on('connection', function(socket) {
 
 		// if this is the first person to join the game init the enemies
 		if(clients.length === 0) {
-			numberOfEnemies = data.enemySpawnPoints.length;
+			let numberOfEnemies = data.enemySpawnPoints.length;
 			enemies = [];
 			data.enemySpawnPoints.forEach(function(enemySpawnPoint) {
 				var enemy = {
