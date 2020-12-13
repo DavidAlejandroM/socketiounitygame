@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     public bool isGrounded = true;
     public float speed = 3.0f;
     public float rotationSpeed = 450.0f;
-    public Vector3 speedJump = new Vector3(0, 10, 0);
+    public Vector3 speedJump = new Vector3(0, 5, 0);
 
     private DateTime dateTimeShot;
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
 
         Bullet b = bullet.GetComponent<Bullet>();
         b.playerFrom = this.gameObject;
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.up * 6;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.up * 12;
 
         Destroy(bullet, 2.0f);
     }

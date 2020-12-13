@@ -6,7 +6,7 @@ public class MotorPlayer : MonoBehaviour {
 
     private PlayerController controller;
 
-    private float gravity = 14.0f;
+    private float gravity = 9.0f;
     private float jumpforce = 10.0f;
     private float verticalVelocity;
     // Use this for initialization
